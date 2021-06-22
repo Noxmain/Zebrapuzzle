@@ -1,0 +1,26 @@
+body {
+  background-color: #F5F5F5;
+  color: #333333;
+  font-size: 20px;
+}
+
+div {
+  margin-left: 20%;
+  margin-right: 20%;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding: 10px;
+}
+
+table {
+  width: 100%;
+}
+
+#title {
+  margin-top: 50px;
+  text-align: center;
+}
+
+#space {
+  margin-bottom: 1000px;
+}
