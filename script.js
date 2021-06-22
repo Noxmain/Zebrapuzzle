@@ -1,0 +1,5 @@
+// By Noxmain
+
+function Puzzle() {
+
+}
