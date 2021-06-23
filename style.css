@@ -15,6 +15,16 @@ div {
 
 table {
   width: 100%;
+  border: none;
+}
+
+table td {
+  padding: 3px 4px;
+  width: 20%;
+}
+
+table tr:nth-child(even) {
+  background: #E0E0E0;
 }
 
 .top {
