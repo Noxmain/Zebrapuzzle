@@ -105,6 +105,16 @@ function Puzzle() {
 }
 
 let puzzle = new Puzzle();
-console.log(puzzle.conditions.join("\n"));
-console.log(puzzle.question);
-console.log(puzzle.solution);
+function new_puzzle() {
+  puzzle.generate();
+
+  for (let i = 0; i < puzzle.conditions.length; i++) {
+    document.getElementById("c" + (i + 1)).innerHTML = puzzle.conditions[i];
+  }
+  document.getElementById("q").innerHTML = puzzle.question;
+  for (let i = 0; i < 5; i++) {
+    for (let j = 0; j < 5; j++) {
+      document.getElementById("s" + (i * 5 + j + 1)).innerHTML = puzzle.solution[i][j];
+    }
+  }
+}
