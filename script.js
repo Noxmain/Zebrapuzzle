@@ -55,9 +55,10 @@ function Puzzle() {
   this.question = "";
 
   this.generate = function() {
-    let o = shuffle([0, 2, 3]);
-    o.insert(o.indexOf(0) + 1, 1);
-    o.insert(o.indexOf(3) + 1, 4);
+    let oo = shuffle([0, 2, 3]);
+    oo.insert(oo.indexOf(0) + 1, 1);
+    oo.insert(oo.indexOf(3) + 1, 4);
+    let o = function(x) {return oo.indexOf(x);};
 
     let c = [];
     while (c.length < 5) {
@@ -74,11 +75,11 @@ function Puzzle() {
     }
 
     let context = function(a1, a2, r, b1, b2) {
-      if (r == "=") {return "Die Person, die " + c[a1].grammatical(o[a2], 0) + ", wohnt im " + (o[b1] + 1) + ". Haus.";}
-      else if (r == "s") {return "Die Person, die " + c[a1].grammatical(o[a2], 0) + ", " + c[b1].grammatical(o[b2], 1) + ".";}
-      else if (r == "r") {return "Die Person, die " + c[a1].grammatical(o[a2], 0) + ", wohnt rechts neben der Person, die " + c[b1].grammatical(o[b2], 0) + ".";}
-      else if (r == "l") {return "Die Person, die " + c[a1].grammatical(o[a2], 0) + ", wohnt links neben der Person, die " + c[b1].grammatical(o[b2], 0) + ".";}
-      else if (r == "n") {return "Die Person, die " + c[a1].grammatical(o[a2], 0) + ", wohnt neben der Person, die " + c[b1].grammatical(o[b2], 0) + ".";}
+      if (r == "=") {return "Die Person, die " + c[a1].grammatical(o(a2), 0) + ", wohnt im " + (o(b1) + 1) + ". Haus.";}
+      else if (r == "s") {return "Die Person, die " + c[a1].grammatical(o(a2), 0) + ", " + c[b1].grammatical(o(b2), 1) + ".";}
+      else if (r == "r") {return "Die Person, die " + c[a1].grammatical(o(a2), 0) + ", wohnt rechts neben der Person, die " + c[b1].grammatical(o(b2), 0) + ".";}
+      else if (r == "l") {return "Die Person, die " + c[a1].grammatical(o(a2), 0) + ", wohnt links neben der Person, die " + c[b1].grammatical(o(b2), 0) + ".";}
+      else if (r == "n") {return "Die Person, die " + c[a1].grammatical(o(a2), 0) + ", wohnt neben der Person, die " + c[b1].grammatical(o(b2), 0) + ".";}
     };
     let t = function(x) {
       if (isin(x, ["A", "B", "C", "D", "E"])) {return ["A", "B", "C", "D", "E"].indexOf(x);}
@@ -102,7 +103,7 @@ function Puzzle() {
     this.conditions.push(context(t("B"), t("1"), "n", t("A"), t("2")));
     this.conditions.push(context(t("D"), t("2"), "n", t("C"), t("1")));
     this.conditions = shuffle(this.conditions);
-    this.question = "Welche Person " + c[t("E")].grammatical(o[t("4")], 1) + "?";
+    this.question = "Welche Person " + c[t("E")].grammatical(o(t("4")), 1) + "?";
   };
   this.generate();
 }
