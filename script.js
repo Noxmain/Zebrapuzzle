@@ -45,8 +45,10 @@ const categories = [
   new Category(["Peter", "Marie", "Paul", "Anna", "Tim", "Emma", "Linus", "Mia", "Till", "Luisa"], ["% heißt", "heißt %"]),
   new Category(["Pizza", "Pasta", "Kartoffeln", "Reis", "Curry", "Obst", "Gemüse", "Burger", "Brot", "Kuchen"], ["% isst", "isst %"]),
   new Category(["Mineralwasser", "Apfelsaft", "Orangensaft", "Milch", "Tee", "Limonade", "Kakao", "Bier", "Wein", "Sprudelwasser"], ["% trinkt", "trinkt %"]),
-  new Category(["Hunde", "Katzen", "Hamster", "Meerschweinchen", "Wellensittiche", "Fische", "Mäuse", "Krebse", "Kanninchen", "Schildkröten"], ["% hat", "hat %"]),
+  new Category(["Hunde", "Katzen", "Hamster", "Meerschweinchen", "Wellensittiche", "Fische", "Mäuse", "Krebse", "Kaninchen", "Schildkröten"], ["% hat", "hat %"]),
   new Category(["Bäckerei", "Tischlerei", "Druckerei", "Schneiderei", "Fleischerei", "Konditorei", "Fahrradwerkstatt", "Autowerkstatt", "Bibliothek", "Goldschmiede"], ["in einer % arbeitet", "arbeitet in einer %"]),
+  new Category(["Rock", "Blues", "Pop", "Indie", "Rap", "Metal", "Electronic", "Klassik", "Punk", "Jazz"], ["% hört", "hört %"]),
+  new Category(["Kriminalromane", "Fantasyromane", "Geschichtsromane", "Lyrik", "Dramen", "Ratgeber", "Sachbücher", "Biografien", "Märchen", "Comics"], ["% liest", "liest %"]),
 ];
 
 function Puzzle() {
