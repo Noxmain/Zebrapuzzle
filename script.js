@@ -77,11 +77,23 @@ function Puzzle() {
     }
 
     let context = function(a1, a2, r, b1, b2) {
-      if (r == "=") {return "Die Person, die " + c[a1].grammatical(o(a2), 0) + ", wohnt im " + (o(b1) + 1) + ". Haus.";}
-      else if (r == "s") {return "Die Person, die " + c[a1].grammatical(o(a2), 0) + ", " + c[b1].grammatical(o(b2), 1) + ".";}
-      else if (r == "r") {return "Die Person, die " + c[a1].grammatical(o(a2), 0) + ", wohnt rechts neben der Person, die " + c[b1].grammatical(o(b2), 0) + ".";}
-      else if (r == "l") {return "Die Person, die " + c[a1].grammatical(o(a2), 0) + ", wohnt links neben der Person, die " + c[b1].grammatical(o(b2), 0) + ".";}
-      else if (r == "n") {return "Die Person, die " + c[a1].grammatical(o(a2), 0) + ", wohnt neben der Person, die " + c[b1].grammatical(o(b2), 0) + ".";}
+      let swap = (Math.random() < 0.5);
+      if (r == "=") {
+        if (swap) {return "Die Person, die " + c[a1].grammatical(o(a2), 0) + ", wohnt im " + (o(b1) + 1) + ". Haus.";}
+        else {return "Im " + (o(b1) + 1) + ". Haus wohnt die Person, die " + c[a1].grammatical(o(a2), 0) + ".";}
+      } else if (r == "s") {
+        if (swap) {return "Die Person, die " + c[a1].grammatical(o(a2), 0) + ", " + c[b1].grammatical(o(b2), 1) + ".";}
+        else {return "Die Person, die " + c[b1].grammatical(o(b2), 0) + ", " + c[a1].grammatical(o(a2), 1) + ".";}
+      } else if (r == "r") {
+        if (swap) {return "Die Person, die " + c[a1].grammatical(o(a2), 0) + ", wohnt rechts neben der Person, die " + c[b1].grammatical(o(b2), 0) + ".";}
+        else {return "Die Person, die " + c[b1].grammatical(o(b2), 0) + ", wohnt links neben der Person, die " + c[a1].grammatical(o(a2), 0) + ".";}
+      } else if (r == "l") {
+        if (swap) {return "Die Person, die " + c[a1].grammatical(o(a2), 0) + ", wohnt links neben der Person, die " + c[b1].grammatical(o(b2), 0) + ".";}
+        else {return "Die Person, die " + c[b1].grammatical(o(b2), 0) + ", wohnt rechts neben der Person, die " + c[a1].grammatical(o(a2), 0) + ".";}
+      } else if (r == "n") {
+        if (swap) {return "Die Person, die " + c[a1].grammatical(o(a2), 0) + ", wohnt neben der Person, die " + c[b1].grammatical(o(b2), 0) + ".";}
+        else {return "Die Person, die " + c[b1].grammatical(o(b2), 0) + ", wohnt neben der Person, die " + c[a1].grammatical(o(a2), 0) + ".";}
+      }
     };
     let t = function(x) {
       if (isin(x, ["A", "B", "C", "D", "E"])) {return ["A", "B", "C", "D", "E"].indexOf(x);}
