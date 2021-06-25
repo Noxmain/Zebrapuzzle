@@ -58,8 +58,8 @@ function Puzzle() {
 
   this.generate = function() {
     let oo = shuffle([0, 2, 3]);
-    oo.insert(oo.indexOf(0) + 1, 1);
-    oo.insert(oo.indexOf(3) + 1, 4);
+    oo.insert(oo.indexOf(0) + Math.round(Math.random()), 1);
+    oo.insert(oo.indexOf(3) + Math.round(Math.random()), 4);
     let o = function(x) {return oo.indexOf(x);};
 
     let c = [];
@@ -104,7 +104,8 @@ function Puzzle() {
     this.conditions.push(context(t("B"), t("3"), "s", t("A"), t("3")));
     this.conditions.push(context(t("B"), t("5"), "s", t("E"), t("5")));
     this.conditions.push(context(t("B"), t("2"), "s", t("C"), t("2")));
-    this.conditions.push(context(t("A"), t("4"), "l", t("A"), t("5")));
+    if (o(3) < o(4)) {this.conditions.push(context(t("A"), t("4"), "l", t("A"), t("5")));}
+    else {this.conditions.push(context(t("A"), t("4"), "r", t("A"), t("5")));}
     this.conditions.push(context(t("A"), t("4"), "s", t("C"), t("4")));
     this.conditions.push(context(t("D"), t("3"), "s", t("E"), t("3")));
     this.conditions.push(context(t("C"), t("3"), "=", t("3")));
