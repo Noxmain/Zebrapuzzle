@@ -1,23 +1,16 @@
 // By Noxmain
 
-function clone(o) {
-  if (o === undefined || typeof o !== 'object') {return o;}
-  let tmp = Object.create(o);
-  for (let key in o) {tmp[key] = clone(o[key]);}
-  return tmp;
-}
+Array.prototype.shuffle = function() {
+  for (let i = this.length - 1; i > 0; i--) {
+      let j = Math.floor(Math.random() * (i + 1));
+      [this[i], this[j]] = [this[j], this[i]];
+  }
+  return this;
+};
 
-function isin(a, b) {
-  return (b.indexOf(a) >= 0);
-}
-
-function shuffle(a) {
-    for (let i = a.length - 1; i > 0; i--) {
-        let j = Math.floor(Math.random() * (i + 1));
-        [a[i], a[j]] = [a[j], a[i]];
-    }
-    return a;
-}
+Array.prototype.contains = function(item) {
+  return (this.indexOf(item) >= 0);
+};
 
 Array.prototype.insert = function(index, item) {
   this.splice(index, 0, item);
@@ -25,13 +18,13 @@ Array.prototype.insert = function(index, item) {
 
 function Category(c, g) {
   this.content = c;
-  this.grammar = g; // Die Person, die ..., wohnt neben der Person, die ....
+  this.grammar = g; // Die Person, die grammar[0], grammar[1].
   this.limit = function(n) {
     if (n > this.content.length) {n = this.content.length;}
     let limited = [];
     while (limited.length < n) {
       let r = Math.floor(Math.random() * this.content.length);
-      if (!isin(this.content[r], limited)) {limited.push(this.content[r]);}
+      if (!limited.contains(this.content[r])) {limited.push(this.content[r]);}
     }
     return new Category(limited, this.grammar);
   };
@@ -57,47 +50,47 @@ function Puzzle() {
   this.question = "";
 
   this.generate = function() {
-    let oo = shuffle([0, 2, 3]);
+    let oo = [0, 2, 3].shuffle();
     oo.insert(oo.indexOf(0) + Math.round(Math.random()), 1);
     oo.insert(oo.indexOf(3) + Math.round(Math.random()), 4);
     let o = function(x) {return oo.indexOf(x);};
 
-    let c = [];
-    while (c.length < 5) {
+    let cats = [];
+    while (cats.length < 5) {
       let r = Math.floor(Math.random() * categories.length);
-      if (!isin(categories[r], c)) {c.push(categories[r]);}
+      if (!cats.contains(categories[r])) {cats.push(categories[r]);}
     }
-    c = c.map(function(x) {return x.limit(5);});
+    cats = cats.map(function(x) {return x.limit(5);});
 
     this.solution = [[], [], [], [], []];
     for (let i = 0; i < 5; i++) {
       for (let j = 0; j < 5; j++) {
-        this.solution[i][j] = c[i].content[j];
+        this.solution[i][j] = cats[i].content[j];
       }
     }
 
     let context = function(a1, a2, r, b1, b2) {
       let swap = (Math.random() < 0.5);
       if (r == "=") {
-        if (swap) {return "Die Person, die " + c[a1].grammatical(o(a2), 0) + ", wohnt im " + (o(b1) + 1) + ". Haus.";}
-        else {return "Im " + (o(b1) + 1) + ". Haus wohnt die Person, die " + c[a1].grammatical(o(a2), 0) + ".";}
+        if (swap) {return "Die Person, die " + cats[a1].grammatical(o(a2), 0) + ", wohnt im " + (o(b1) + 1) + ". Haus.";}
+        else {return "Im " + (o(b1) + 1) + ". Haus wohnt die Person, die " + cats[a1].grammatical(o(a2), 0) + ".";}
       } else if (r == "s") {
-        if (swap) {return "Die Person, die " + c[a1].grammatical(o(a2), 0) + ", " + c[b1].grammatical(o(b2), 1) + ".";}
-        else {return "Die Person, die " + c[b1].grammatical(o(b2), 0) + ", " + c[a1].grammatical(o(a2), 1) + ".";}
+        if (swap) {return "Die Person, die " + cats[a1].grammatical(o(a2), 0) + ", " + cats[b1].grammatical(o(b2), 1) + ".";}
+        else {return "Die Person, die " + cats[b1].grammatical(o(b2), 0) + ", " + cats[a1].grammatical(o(a2), 1) + ".";}
       } else if (r == "r") {
-        if (swap) {return "Die Person, die " + c[a1].grammatical(o(a2), 0) + ", wohnt rechts neben der Person, die " + c[b1].grammatical(o(b2), 0) + ".";}
-        else {return "Die Person, die " + c[b1].grammatical(o(b2), 0) + ", wohnt links neben der Person, die " + c[a1].grammatical(o(a2), 0) + ".";}
+        if (swap) {return "Die Person, die " + cats[a1].grammatical(o(a2), 0) + ", wohnt rechts neben der Person, die " + cats[b1].grammatical(o(b2), 0) + ".";}
+        else {return "Die Person, die " + cats[b1].grammatical(o(b2), 0) + ", wohnt links neben der Person, die " + cats[a1].grammatical(o(a2), 0) + ".";}
       } else if (r == "l") {
-        if (swap) {return "Die Person, die " + c[a1].grammatical(o(a2), 0) + ", wohnt links neben der Person, die " + c[b1].grammatical(o(b2), 0) + ".";}
-        else {return "Die Person, die " + c[b1].grammatical(o(b2), 0) + ", wohnt rechts neben der Person, die " + c[a1].grammatical(o(a2), 0) + ".";}
+        if (swap) {return "Die Person, die " + cats[a1].grammatical(o(a2), 0) + ", wohnt links neben der Person, die " + cats[b1].grammatical(o(b2), 0) + ".";}
+        else {return "Die Person, die " + cats[b1].grammatical(o(b2), 0) + ", wohnt rechts neben der Person, die " + cats[a1].grammatical(o(a2), 0) + ".";}
       } else if (r == "n") {
-        if (swap) {return "Die Person, die " + c[a1].grammatical(o(a2), 0) + ", wohnt neben der Person, die " + c[b1].grammatical(o(b2), 0) + ".";}
-        else {return "Die Person, die " + c[b1].grammatical(o(b2), 0) + ", wohnt neben der Person, die " + c[a1].grammatical(o(a2), 0) + ".";}
+        if (swap) {return "Die Person, die " + cats[a1].grammatical(o(a2), 0) + ", wohnt neben der Person, die " + cats[b1].grammatical(o(b2), 0) + ".";}
+        else {return "Die Person, die " + cats[b1].grammatical(o(b2), 0) + ", wohnt neben der Person, die " + cats[a1].grammatical(o(a2), 0) + ".";}
       }
     };
     let t = function(x) {
-      if (isin(x, ["A", "B", "C", "D", "E"])) {return ["A", "B", "C", "D", "E"].indexOf(x);}
-      if (isin(x, ["1", "2", "3", "4", "5"])) {return ["1", "2", "3", "4", "5"].indexOf(x);}
+      if (["A", "B", "C", "D", "E"].contains(x)) {return ["A", "B", "C", "D", "E"].indexOf(x);}
+      if (["1", "2", "3", "4", "5"].contains(x)) {return ["1", "2", "3", "4", "5"].indexOf(x);}
     };
 
     this.conditions = [];
@@ -117,8 +110,8 @@ function Puzzle() {
     this.conditions.push(context(t("B"), t("4"), "s", t("D"), t("4")));
     this.conditions.push(context(t("B"), t("1"), "n", t("A"), t("2")));
     this.conditions.push(context(t("D"), t("2"), "n", t("C"), t("1")));
-    this.conditions = shuffle(this.conditions);
-    this.question = "Welche Person " + c[t("E")].grammatical(o(t("4")), 1) + "?";
+    this.conditions.shuffle();
+    this.question = "Welche Person " + cats[t("E")].grammatical(o(t("4")), 1) + "?";
   };
   this.generate();
 }
