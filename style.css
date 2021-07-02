@@ -41,6 +41,10 @@ table tr:nth-child(even) {
   margin-bottom: 1000px;
 }
 
+.solution {
+  text-align: center;
+}
+
 .author {
   color: #888888;
   font-size: 13px;
