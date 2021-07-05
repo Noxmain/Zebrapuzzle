@@ -128,13 +128,7 @@ let puzzle = new Puzzle();
 function new_puzzle() {
   puzzle.generate();
 
-  for (let i = 0; i < puzzle.conditions.length; i++) {
-    document.getElementById("c" + (i + 1)).innerHTML = puzzle.conditions[i];
-  }
-  document.getElementById("q").innerHTML = puzzle.question;
-  for (let i = 0; i < 5; i++) {
-    for (let j = 0; j < 5; j++) {
-      document.getElementById("s" + (i * 5 + j + 1)).innerHTML = puzzle.solution[i][j];
-    }
-  }
+  document.getElementById("conditions_list").innerHTML = puzzle.conditions.map(function(x) {return "<li>" + x + "</li>";}).join("");
+  document.getElementById("question").innerHTML = puzzle.question;
+  document.getElementById("solution_table").innerHTML = puzzle.solution.map(function(x) {return "<tr>" + x.map(function(y) {return "<td>" + y + "</td>";}).join("") + "</tr>";}).join("");
 }
