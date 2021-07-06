@@ -53,7 +53,7 @@ const categories = [
 ];
 
 const conditionsets = [
-  {conditions: ["B1=1", "C3=3", "A1sA4", "B1lA2", "C1lD2", "D1lE2", "E1lD2", "B2sC2", "A3sB3", "D3sE3", "A4sC4", "B4sD4", "A4lA5", "B5sE5", "C5sD5"], question: "E4"}
+  {conditions: ["B1=1", "C3=3", "A1sA4", "B1nA2", "C1nD2", "D1nE2", "E1nD2", "B2sC2", "A3sB3", "D3sE3", "A4sC4", "B4sD4", "A4lA5", "B5sE5", "C5sD5"], question: "E4"}
 ];
 
 /*
